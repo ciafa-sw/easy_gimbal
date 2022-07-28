@@ -225,10 +225,11 @@ class GimbalControlUI(GimbalBase):
 
 
 class GimbalConsole:
-    def __init__(self, video: GimbalVideoUI,
-                       control: GimbalControlUI,
-                       telemetry: GimbalTelemetryUI):
+    def __init__(self, video: Optional[GimbalVideoUI] = None,
+                       control: Optional[GimbalControlUI] = None,
+                       telemetry: Optional[GimbalTelemetryUI] = None):
         self.video = video
+        self.video_iter = None
         self.control = control
         self.telemetry = telemetry
 
@@ -237,29 +238,34 @@ class GimbalConsole:
 
     def init_gui(self):
         dpg.create_context()
-        with dpg.texture_registry(show=False):
-            self.video.register_texture()
 
-        with dpg.window(label="Video player"):
-            dpg.add_image(self.video.texture_tag)
+        if self.video is not None:
+            with dpg.texture_registry(show=False):
+                self.video.register_texture()
+
+            with dpg.window(label="Video player"):
+                dpg.add_image(self.video.texture_tag)
+            self.video_iter = self.video.run()
 
         self.control.init_gui()
-        self.telemetry.init_gui()
+        if self.telemetry is not None:
+            self.telemetry.init_gui()
 
         dpg.create_viewport(title='Dashboard', width=800, height=600)
         dpg.setup_dearpygui()
         dpg.show_viewport()
 
     def loop(self):
-        video_iters = self.video.run()
+
         while dpg.is_dearpygui_running():
-            next(video_iters)
+            if self.video is not None:
+                next(self.video_iter)
             dpg.render_dearpygui_frame()  # render GUI
 
 
 if __name__ == '__main__':
-    console = GimbalConsole(video= GimbalVideo('udp://localhost:20000'),
-                            control = GimbalControl(),
+    console = GimbalConsole(video= GimbalVideoUI('udp://localhost:20000'),
+                            control = GimbalControlUI(),
                             )
     console.loop()
     dpg.destroy_context()
