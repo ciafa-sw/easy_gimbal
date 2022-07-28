@@ -8,11 +8,22 @@ from payload_terminal.terminal import GimbalConsole, GimbalControlUI, GimbalVide
 def main():
     rospy.init_node('payload_terminal', log_level=rospy.INFO)
 
-    src = rospy.get_param("/payload_terminal/video_src")
+    src = rospy.get_param("/payload_terminal/video_src", None)
+    telemetry_topic = rospy.get_param("/payload_terminal/telemetry_topic", None)
 
-    console = GimbalConsole(video=GimbalVideoUI(src),
+    rospy.loginfo(f'params | src={src}   topic={telemetry_topic}')
+
+    video_module = None
+    telemetry_module = None
+    if src is not None:
+        video_module = GimbalVideoUI(src)
+
+    if telemetry_topic is not None:
+        telemetry_module = GimbalTelemetryUI(gimbal_telemetry_topic=telemetry_topic)
+
+    console = GimbalConsole(video=video_module,
                             control=GimbalControlUI(),
-                            telemetry=GimbalTelemetryUI())
+                            telemetry=telemetry_module)
     console.loop()
     dpg.destroy_context()
 
