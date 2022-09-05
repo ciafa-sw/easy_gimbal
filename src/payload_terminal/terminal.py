@@ -127,13 +127,15 @@ class GimbalControlUI(GimbalBase):
             dpg.add_text('Up arrow - tilt up')
             dpg.add_text('Down arrow - tilt down')
 
-            dpg.add_text('1 numpad - visible spectrum sensor')
-            dpg.add_text('2 numpad - ir sensor')
+            dpg.add_text('0 numpad - visible spectrum sensor')
+            dpg.add_text('1 numpad - ir sensor')
 
             dpg.add_text('+ plus numpad - zoom in')
             dpg.add_text('- minus numpad - zoom out')
 
-            dpg.add_text('Commands are active during 1 second')
+            dpg.add_text('space bar - stop pan, tilt and zoom')
+
+            #dpg.add_text('Commands are active during 1 second')
 
             dpg.add_slider_int(label="zoom speed", default_value=3, min_value=0, max_value=7,
                                callback=self.set_zoom_speed, tag='zoom_speed_slider')
@@ -264,8 +266,8 @@ class GimbalConsole:
 
 
 if __name__ == '__main__':
-    console = GimbalConsole(video= GimbalVideoUI('udp://localhost:20000'),
-                            control = GimbalControlUI(),
+    console = GimbalConsole(video=GimbalVideoUI('udp://localhost:20000'),
+                            control=GimbalControlUI(),
                             )
     console.loop()
     dpg.destroy_context()
