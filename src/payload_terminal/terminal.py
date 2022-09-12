@@ -68,7 +68,7 @@ class GimbalVideoUI(GimbalBase):
 
 
 class GimbalTelemetryUI(GimbalBase):
-    def __init__(self, gimbal_telemetry_topic: str = '/ground/gimbal/telemetry'):
+    def __init__(self, gimbal_telemetry_topic: str = 'telemetry'):
         self.tele_sub = rospy.Subscriber(gimbal_telemetry_topic, GimbalTelemetry, self.update_telemetry)
         self.tele = ''
 
@@ -102,12 +102,12 @@ class ControlKeys(Enum):
 
 class GimbalControlUI(GimbalBase):
     def __init__(self,
-                 pan_speed_topic: str = '/gimbal/pan/speed_cmd',
-                 tilt_speed_topic: str = '/gimbal/tilt/speed_cmd',
-                 zoom_abs_topic: str = '/gimbal/zoom/position_cmd',
-                 zoom_speed_topic: str = '/gimbal/zoom/speed_cmd',
-                 sensor_topic: str = '/gimbal/sensor/change_cmd',
-                 resolution_topic: str = '/gimbal/sensor/resolution_cmd',
+                 pan_speed_topic: str = 'pan/speed_cmd',
+                 tilt_speed_topic: str = 'tilt/speed_cmd',
+                 zoom_abs_topic: str = 'zoom/position_cmd',
+                 zoom_speed_topic: str = 'zoom/speed_cmd',
+                 sensor_topic: str = 'sensor/change_cmd',
+                 resolution_topic: str = 'sensor/resolution_cmd',
                  publish_queue_size: int = 10):
         self.publishers = {
             'pan_speed': rospy.Publisher(pan_speed_topic, PanSpeedCmd, queue_size=publish_queue_size),
