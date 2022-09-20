@@ -5,11 +5,13 @@ The idea is to have a specific implementation of this interface for any gimbal.
 This terminal will interact with that implementation via network.
 
 Accepted inputs:
+
 - MPEGTS stream with video
 - MISB ST 0601.8 formated telemetry (see https://github.com/ciafa-sw/pydroneklv)
 - gimbal responses to commands
 
 Outputs:
+
 - gimbal commands
   - zoom in/out speed
   - zoom abs position
@@ -19,13 +21,15 @@ Outputs:
   - change resolution
 
 GUI
+
 - window with received video
 - window with received telemetry
 - window with gimbal commands and command response
 
 
 TODO
--  receive telemetry
+
+receive telemetry
 - receive commands response
 - send commands
 - configure video reception
