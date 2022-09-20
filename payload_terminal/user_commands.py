@@ -22,9 +22,10 @@ class ControlKeys(Enum):
 
 
 class GimbalControlUI:
-    is_zoom_active: int  # 0 is false, >0 is zoom in, <0 is zoom out
-    is_tilt_active: int  # 0 is false, >0 is tilt up, <0 is tilt down TODO check
-    is_pan_active: int  # 0 is false, >0 is pan right, <0 is pan left TODO check
+    def __init__(self):
+        self.is_zoom_active: int = 0  # 0 is false, >0 is zoom in, <0 is zoom out
+        self.is_tilt_active: int = 0  # 0 is false, >0 is tilt up, <0 is tilt down TODO check
+        self.is_pan_active: int = 0  # 0 is false, >0 is pan right, <0 is pan left TODO check
 
     def init_gui(self):
         with dpg.window(label='Tools'):

@@ -36,7 +36,6 @@ class GimbalConsole:
 
             with dpg.window(label="Video player"):
                 dpg.add_image(self.video.texture_tag)
-            self.video_iter = self.video.run()
 
         self.control.init_gui()
         if self.telemetry is not None:
@@ -48,9 +47,9 @@ class GimbalConsole:
 
     def loop(self):
         print('starting...')
+        if self.video is not None:
+            self.video.start()
         while dpg.is_dearpygui_running():
-            if self.video is not None:
-                next(self.video_iter)
             dpg.render_dearpygui_frame()  # render GUI
 
 

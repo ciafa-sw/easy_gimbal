@@ -1,3 +1,5 @@
+import threading
+
 import numpy as np
 import dearpygui.dearpygui as dpg
 import av
@@ -34,6 +36,8 @@ class GimbalVideoUI():
         self.video_src = load_video(src)
         self.texture_tag = None
 
+        self.thread = threading.Thread(target=self.run)
+
     def register_texture(self):
         self.texture_tag = get_texture_name()
         with dpg.texture_registry(show=False):
@@ -46,7 +50,9 @@ class GimbalVideoUI():
         h2, w2, d2 = new_frame.shape  # get real frame size
         self._raw_texture_data[:h2, :w2] = new_frame[:, :] / 255
 
+    def start(self):
+        self.thread.start()
+
     def run(self):
         for frame in self.video_src:
             self.update_dynamic_texture(frame)
-            yield
