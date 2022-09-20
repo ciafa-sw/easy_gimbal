@@ -1,7 +1,0 @@
-<launch>
-    <node name="payload_terminal" pkg="payload_terminal" type="terminal_node.py" output="screen" >
-        <param name="video_src" type="str" value="udp://localhost:30000" />
-        <param name="telemetry_topic" type="str" value="/gimbal/telemetry" />
-    </node>
-
-</launch>
