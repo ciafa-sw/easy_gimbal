@@ -29,7 +29,7 @@ GUI
 
 TODO
 
-receive telemetry
+- receive telemetry
 - receive commands response
 - send commands
 - configure video reception

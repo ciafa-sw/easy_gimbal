@@ -1,7 +1,7 @@
 import dearpygui.dearpygui as dpg
-from video import GimbalVideoUI
-from user_commands import GimbalControlUI
-from telemetry import GimbalTelemetryUI
+from payload_terminal.video import GimbalVideoUI
+from payload_terminal.user_commands import GimbalControlUI
+from payload_terminal.telemetry import GimbalTelemetryUI
 
 from typing import Optional
 from enum import Enum
@@ -47,7 +47,7 @@ class GimbalConsole:
         dpg.show_viewport()
 
     def loop(self):
-
+        print('starting...')
         while dpg.is_dearpygui_running():
             if self.video is not None:
                 next(self.video_iter)

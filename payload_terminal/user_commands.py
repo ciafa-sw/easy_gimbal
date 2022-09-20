@@ -1,7 +1,7 @@
 from enum import Enum
 import dearpygui.dearpygui as dpg
-import comm
-import commands
+import payload_terminal.comm as comm
+import payload_terminal.commands as commands
 
 
 def which_key(sender, x, y):
@@ -45,17 +45,17 @@ class GimbalControlUI:
             #dpg.add_text('Commands are active during 1 second')
 
             dpg.add_slider_int(label="zoom speed", default_value=3, min_value=0, max_value=7,
-                               callback=self.set_zoom_speed, tag='zoom_speed_slider')
+                               callback=None, tag='zoom_speed_slider')
             dpg.add_slider_int(label="zoom pos", default_value=3, min_value=0, max_value=7,
-                               callback=self.set_zoom_speed, tag='zoom_speed_slider')
+                               callback=None, tag='zoom_pos_slider')
             dpg.add_slider_int(label="pan speed", default_value=200, min_value=0, max_value=512,
-                               callback=self.set_pan_tilt_speed, tag='pan_speed_slider')
+                               callback=None, tag='pan_speed_slider')
             dpg.add_slider_int(label="tilt speed", default_value=200, min_value=0, max_value=512,
-                               callback=self.set_pan_tilt_speed, tag='tilt_speed_slider')
+                               callback=None, tag='tilt_speed_slider')
             dpg.add_slider_int(label="pan pos", default_value=200, min_value=0, max_value=512,
-                               callback=self.set_pan_tilt_speed, tag='pan_pos_slider')
+                               callback=None, tag='pan_pos_slider')
             dpg.add_slider_int(label="tilt pos", default_value=200, min_value=0, max_value=512,
-                               callback=self.set_pan_tilt_speed, tag='tilt_pos_slider')
+                               callback=None, tag='tilt_pos_slider')
 
         def change_text(sender, app_data):
             dpg.set_value("text_item", f"Mouse Button: {app_data[0]}, Down Time: {app_data[1]} seconds")
@@ -151,3 +151,9 @@ class GimbalControlUI:
             comm.send_cmd(commands.PanTiltSpeed(tilt_speed=-s,
                                                 pan_speed=self.is_pan_active))
             self.is_tilt_active = -s
+
+    def pan_tilt_stop(self):
+        comm.send_cmd(commands.PanTiltSpeed(tilt_speed=0,
+                                            pan_speed=0))
+        self.is_tilt_active = 0
+        self.is_pan_active = 0

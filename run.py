@@ -8,7 +8,7 @@ import dearpygui.dearpygui as dpg
 
 def main():
 
-    src = 'localhost:30000'
+    src = 'udp://localhost:30000'
     telemetry_topic = None
 
     video_module = GimbalVideoUI(src) if src is not None else None
@@ -19,3 +19,7 @@ def main():
                             telemetry=telemetry_module)
     console.loop()
     dpg.destroy_context()
+
+
+if __name__ == '__main__':
+    main()
