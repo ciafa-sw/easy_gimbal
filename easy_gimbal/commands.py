@@ -46,8 +46,11 @@ class GimbalResponse:
 class GimbalTelemetry(GimbalResponse):
     data: bytes
 
+@dataclass
+class GimbalGeneralResponse(GimbalResponse):
+    data: bytes
 
 @dataclass
 class GimbalCommandError(GimbalResponse):
     """generic gimbal command error"""
-
+    data: bytes

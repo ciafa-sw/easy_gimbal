@@ -1,7 +1,7 @@
 from enum import Enum
 import dearpygui.dearpygui as dpg
-import payload_terminal.comm as comm
-import payload_terminal.commands as commands
+import easy_gimbal.comm as comm
+import easy_gimbal.commands as commands
 
 
 def which_key(sender, x, y):

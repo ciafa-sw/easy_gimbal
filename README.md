@@ -14,11 +14,15 @@ Outputs:
 
 - gimbal commands
   - zoom in/out speed
-  - zoom abs position
+  - zoom absolute position
   - sensor change
   - pan/tilt speed
   - pan/tilt absolute position
   - change resolution
+  - position lock
+  - target
+    - target lock
+    - keep target same size in image
 
 GUI
 

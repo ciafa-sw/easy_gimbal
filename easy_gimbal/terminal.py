@@ -1,7 +1,7 @@
 import dearpygui.dearpygui as dpg
-from payload_terminal.video import GimbalVideoUI
-from payload_terminal.user_commands import GimbalControlUI
-from payload_terminal.telemetry import GimbalTelemetryUI
+from easy_gimbal.video import GimbalVideoUI
+from easy_gimbal.user_commands import GimbalControlUI
+from easy_gimbal.telemetry import GimbalTelemetryUI
 
 from typing import Optional
 from enum import Enum

@@ -1,4 +1,4 @@
-from payload_terminal.commands import GimbalCommand
+from easy_gimbal.commands import GimbalCommand
 
 
 def send_cmd(cmd: GimbalCommand):
